@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ROYALDATA Ghana — Customer Dashboard</title>
+<style>
+:root{--gold:#ffc900;--gold2:#ffa600;--navy:#172b45;--ink:#182334;--muted:#697386;--paper:#fff;--bg:#f2f4f7;--green:#08b66b;--line:#e8ebef;--radius:22px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Georgia,"Times New Roman",serif;color:var(--ink)}
+button,input,select{font:inherit}button{cursor:pointer}
+.topline{height:9px;background:#2862e8}
+header{position:sticky;top:0;z-index:5;background:#fff;box-shadow:0 3px 14px #15243b12;display:flex;align-items:center;justify-content:space-between;padding:15px 20px;gap:12px}
+.brand{display:flex;align-items:center;gap:10px;font-size:clamp(20px,4vw,28px);font-weight:bold;color:var(--navy);letter-spacing:-.7px}
+.brandmark{width:45px;height:45px;border:3px solid var(--navy);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font-family:Arial,sans-serif;font-weight:900;font-size:23px}
+.brand span span{color:#d88a14}
+.header-actions{display:flex;align-items:center;gap:10px}
+.iconbtn{width:43px;height:43px;border:0;background:#f6f7f9;border-radius:13px;color:var(--navy);font-size:20px}
+.menu-btn{background:var(--gold);font-size:24px;box-shadow:0 4px 9px #d99e2533}
+main{max-width:900px;margin:auto;padding:18px 14px 28px;display:grid;gap:18px}
+.card{background:var(--paper);border:1px solid #e8ebef;border-radius:var(--radius);box-shadow:0 5px 12px #172b4514;overflow:hidden}
+.hero{padding:24px;background:linear-gradient(125deg,#ffc900,#ffa300);box-shadow:0 6px 12px #d5a00030}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.hero h1{font-size:clamp(23px,5vw,31px);margin:0 0 6px;color:#fff;line-height:1.2}
+.hero p{margin:0;color:#fff7df;font-size:17px}
+.hero-icons{display:flex;gap:9px}
+.roundbtn{width:48px;height:48px;border:0;border-radius:50%;background:#fff;color:#d69b00;font-size:22px}
+.roundbtn.dark{background:#4b4321;color:var(--gold)}
+.tag{display:inline-block;background:#090909;color:white;padding:9px 17px;border-radius:99px;font-weight:bold;margin-top:15px;border:1px solid #fff8}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.action-btn{border:0;border-radius:13px;padding:13px 15px;background:var(--navy);color:var(--gold);font-weight:bold;box-shadow:0 4px 8px #162b4525}
+.action-btn.green{background:var(--green);color:white}
+.hero-bottom{border-top:1px solid #ffffff55;margin-top:24px;padding-top:17px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;color:white}
+.trust{display:flex;gap:13px;flex-wrap:wrap;font-size:14px}
+.help-pill{background:#d99000;border:0;border-radius:99px;color:white;padding:10px 15px;font-weight:bold}
+.section{padding:18px;position:relative}
+.section:before{content:"";height:5px;position:absolute;top:0;left:0;right:0;background:linear-gradient(90deg,#ffc900,#ff594e,#5b61ee)}
+h2{font-size:23px;margin:3px 0 16px}
+.networks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.network{border:1px solid #e9eaf0;border-radius:16px;padding:13px 5px 12px;background:#fffdf2;text-align:center;color:var(--ink);transition:.15s}
+.network:nth-child(2){background:#eff6ff}.network:nth-child(3){background:#fff1f1}.network:nth-child(4){background:#effcf4}
+.network:hover,.network:focus{outline:2px solid var(--gold);transform:translateY(-2px)}
+.network-logo{height:54px;width:54px;border-radius:13px;margin:0 auto 8px;display:grid;place-items:center;background:var(--gold);color:#111;font:bold 15px Arial}
+.network:nth-child(2) .network-logo{background:#0878b9;color:white;border-radius:50%;font-size:25px}
+.network:nth-child(3) .network-logo{background:#d80b26;color:white;border-radius:50%;font-size:25px}
+.network:nth-child(4) .network-logo{background:#00c36b;color:white;font-size:25px}
+.network strong{display:block;font-size:15px}
+.stats{padding:20px;background:linear-gradient(125deg,#ffc900,#ffa600);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px;text-align:center}
+.stat-icon{margin:0 auto 9px;width:61px;height:61px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--gold);font:26px Arial}
+.stat-label{font-size:17px;margin-bottom:8px}.stat-value{font-weight:bold;font-size:23px}
+.small-deposit{margin-top:10px;border:0;background:var(--navy);color:var(--gold);font-weight:bold;border-radius:99px;padding:10px 20px;box-shadow:0 3px 8px #14233b30}
+.orders{padding:18px}
+.orders-title{display:flex;align-items:center;gap:10px}
+.count{background:#fff5c7;color:#9a7400;border-radius:50%;padding:5px 10px;font-size:14px}
+.order-row{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#f8f9fb;border-radius:14px;padding:12px;margin-top:10px;font-family:Arial,sans-serif;font-size:14px}
+.order-left{display:flex;align-items:center;gap:10px;min-width:0}.order-logo{background:var(--gold);border-radius:9px;padding:8px;font-weight:bold}.muted{color:var(--muted);font-size:12px;margin-top:5px}.status{background:#e0f8eb;color:#087c4b;padding:6px 9px;border-radius:99px;font-size:12px;white-space:nowrap}
+.quick .quick-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.quick-tile{border:0;border-radius:18px;background:#fffbed;min-height:105px;padding:12px 5px;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px}
+.quick-tile:hover{outline:2px solid var(--gold)}
+.tile-icon{width:48px;height:48px;border-radius:16px;background:var(--navy);color:var(--gold);display:grid;place-items:center;font:25px Arial}
+.quick-tile:nth-child(4) .tile-icon,.quick-tile:nth-child(9) .tile-icon{background:var(--gold);color:var(--navy)}
+.quick-tile.spin{background:linear-gradient(135deg,#b83ff0,#d100c7);color:white;font-weight:bold}
+.quick-tile.spin .tile-icon{background:#ffffff35;color:#ffe56c}
+footer{background:#fff;padding:32px 20px 24px;margin-top:8px}
+.footer-inner{max-width:870px;margin:auto}
+.footer-brand{margin-bottom:23px}
+.footer-desc{color:#626b77;font-size:18px;line-height:1.55;max-width:610px}
+.channel{display:inline-flex;align-items:center;gap:12px;background:#effcf5;border:1px solid #cceedd;border-radius:17px;padding:14px 17px;color:#087a48;margin:14px 0 28px;text-decoration:none}
+.footer-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;margin-top:20px}
+.footer-columns h3{font-size:18px;color:#c77c1c;margin:0 0 15px}
+.footer-columns a{display:block;color:#68717d;text-decoration:none;margin:12px 0;font-size:16px}
+.footer-columns a:hover{color:#b77a00}
+.contactline{color:#68717d;line-height:1.5;margin:12px 0}
+.copyright{border-top:1px solid var(--line);margin-top:27px;padding-top:18px;color:#777f8b;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,150%);background:#172b45;color:white;padding:13px 18px;border-radius:14px;box-shadow:0 8px 28px #0003;z-index:20;transition:.25s;max-width:90%;text-align:center;font:14px Arial,sans-serif}
+.toast.show{transform:translate(-50%,0)}
+.modal-backdrop{display:none;position:fixed;inset:0;background:#10182799;z-index:30;padding:20px;align-items:center;justify-content:center}
+.modal-backdrop.open{display:flex}
+.modal{background:#fff;border-radius:22px;padding:22px;width:min(100%,440px);box-shadow:0 20px 50px #0004}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.modal-head h2{margin:0 0 15px}.close{border:0;background:#f0f2f5;border-radius:50%;width:35px;height:35px;font-size:20px}
+.modal label{display:block;font:14px Arial,sans-serif;color:#515b6b;margin:13px 0 6px}
+.modal input,.modal select{width:100%;padding:13px;border:1px solid #d9dee7;border-radius:11px;background:#fff}
+.modal .action-btn{width:100%;margin-top:16px}
+.note{font:12px/1.5 Arial,sans-serif;color:#737c89;margin-top:12px}
+@media(min-width:760px){main{padding:24px 20px}.hero{padding:30px}.stats{padding:25px}.section,.orders{padding:22px}.footer-columns{gap:50px}}
+@media(max-width:430px){header{padding:12px}.brand{font-size:20px}.brandmark{width:39px;height:39px}.header-actions{gap:6px}.iconbtn{width:37px;height:39px}.networks{gap:6px}.network{padding:10px 2px}.network-logo{width:45px;height:45px}.network strong{font-size:13px}.hero{padding:19px}.action-btn{padding:12px 13px;font-size:14px}.quick .quick-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.quick-tile{min-height:94px;font-size:13px}.tile-icon{width:43px;height:43px}.footer-columns{grid-template-columns:repeat(2,minmax(0,1fr))}.footer-columns section:last-child{grid-column:1/-1}}
+
+/* Compact layout update: slightly smaller text, cards, icons and spacing */
+header{padding:11px 16px;gap:9px}
+.brand{font-size:clamp(18px,3.5vw,24px);gap:8px}
+.brandmark{width:39px;height:39px;font-size:20px}
+.iconbtn{width:38px;height:38px;font-size:18px;border-radius:11px}
+.menu-btn{font-size:21px}
+main{max-width:860px;padding:14px 12px 22px;gap:14px}
+.card{--radius:18px}
+.hero{padding:19px}
+.hero h1{font-size:clamp(20px,4.4vw,27px)}
+.hero p{font-size:15px}
+.roundbtn{width:41px;height:41px;font-size:19px}
+.tag{padding:7px 13px;margin-top:11px;font-size:14px}
+.hero-actions{gap:8px;margin-top:17px}
+.action-btn{padding:10px 12px;border-radius:11px;font-size:14px}
+.hero-bottom{margin-top:18px;padding-top:13px}
+.trust{gap:10px;font-size:12px}
+.help-pill{padding:8px 12px;font-size:13px}
+.section,.orders{padding:15px}
+.section:before{height:4px}
+h2{font-size:20px;margin:3px 0 12px}
+.networks{gap:8px}
+.network{border-radius:13px;padding:10px 4px}
+.network-logo{height:45px;width:45px;border-radius:11px;margin-bottom:6px;font-size:13px}
+.network strong{font-size:13px}
+.stats{padding:16px;gap:17px 10px}
+.stat-icon{width:50px;height:50px;font-size:22px;margin-bottom:7px}
+.stat-label{font-size:14px;margin-bottom:6px}
+.stat-value{font-size:20px}
+.small-deposit{margin-top:8px;padding:8px 16px;font-size:13px}
+.count{padding:4px 8px;font-size:12px}
+.order-row{padding:10px;font-size:13px;border-radius:12px}
+.order-logo{padding:6px}
+.muted,.status{font-size:11px}
+.status{padding:5px 7px}
+.quick .quick-grid{gap:8px}
+.quick-tile{min-height:88px;border-radius:15px;padding:9px 4px;gap:7px;font-size:13px}
+.tile-icon{width:41px;height:41px;border-radius:13px;font-size:22px}
+footer{padding:25px 16px 20px}
+.footer-brand{margin-bottom:17px}
+.footer-desc{font-size:16px;line-height:1.5}
+.channel{gap:9px;border-radius:14px;padding:11px 13px;margin:11px 0 22px;font-size:14px}
+.footer-columns{gap:20px;margin-top:16px}
+.footer-columns h3{font-size:16px;margin-bottom:12px}
+.footer-columns a{margin:9px 0;font-size:14px}
+.contactline{font-size:14px;margin:10px 0}
+.copyright{margin-top:22px;padding-top:14px;font-size:13px}
+.modal{border-radius:18px;padding:18px;width:min(100%,410px)}
+.modal-head h2{font-size:19px}
+.modal input,.modal select{padding:11px;font-size:14px}
+@media(max-width:430px){
+ header{padding:10px}
+ .brand{font-size:18px}.brandmark{width:35px;height:35px;font-size:18px}
+ .iconbtn{width:34px;height:35px;font-size:17px}
+ .hero{padding:15px}.hero h1{font-size:20px}.hero p{font-size:14px}
+ .hero-icons{gap:6px}.roundbtn{width:35px;height:35px;font-size:17px}
+ .action-btn{padding:9px 10px;font-size:12px}
+ .networks{gap:5px}.network{padding:8px 2px}.network-logo{width:39px;height:39px}
+ .network strong{font-size:11px}
+ .stat-label{font-size:13px}.stat-value{font-size:18px}
+ .quick .quick-grid{gap:6px}.quick-tile{min-height:78px;font-size:12px}.tile-icon{width:36px;height:36px;font-size:20px}
+ .footer-columns{gap:14px}
+}
+
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<header>
+  <div class="brand"><div class="brandmark">R</div><span>ROYAL<span>DATA</span> <small style="font-size:12px;color:#6e7785">🇬🇭</small></span></div>
+  <div class="header-actions">
+    <button class="iconbtn" aria-label="Notifications" onclick="toast('You are all caught up with notifications.')">♧</button>
+    <button class="iconbtn" aria-label="Wallet" onclick="openModal('deposit')">▱</button>
+    <button class="iconbtn menu-btn" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+  </div>
+</header>
+<main>
+  <section class="card hero">
+    <div class="hero-top">
+      <div><h1>Mema wo aha, welcome!</h1><p>Good day! Welcome to ROYALDATA Ghana.</p><div class="tag">Fast Data. Easy Life. 🇬🇭</div></div>
+      <div class="hero-icons"><button class="roundbtn dark" aria-label="Appearance" onclick="toggleTheme()">◉</button><button class="roundbtn" aria-label="Profile" onclick="toast('Profile section demo — account backend not connected yet.')">♙</button></div>
+    </div>
+    <div class="hero-actions">
+      <button class="action-btn green" onclick="openModal('deposit')">▱ &nbsp; Deposit Now</button>
+      <button class="action-btn" onclick="scrollToId('recent-orders')">◇ &nbsp; Orders</button>
+      <button class="action-btn" onclick="toast('Transactions will appear here after the backend is connected.')">▤ &nbsp; Transactions</button>
+      <button class="action-btn" onclick="toast('Bulk ordering is planned for a future version.')">▱ &nbsp; Bulk</button>
+      <button class="action-btn" onclick="toast('The agent store will be enabled in a future version.')">♙ &nbsp; Agent Store</button>
+    </div>
+    <div class="hero-bottom"><div class="trust"><span>ϟ Instant</span><span>♢ Secure</span><span>⌁ 24/7</span></div><button class="help-pill" onclick="toast('Need help? Add your official customer-support WhatsApp link here.')">☏ &nbsp; Need Help ›</button></div>
+  </section>
+
+  <section class="card section" id="place-order">
+    <h2>Place New Order</h2>
+    <div class="networks">
+      <button class="network" onclick="selectNetwork('MTN')"><span class="network-logo">MTN</span><strong>MTN</strong></button>
+      <button class="network" onclick="selectNetwork('AirtelTigo')"><span class="network-logo">☺</span><strong>AirtelTigo</strong></button>
+      <button class="network" onclick="selectNetwork('Telecel')"><span class="network-logo">t</span><strong>Telecel</strong></button>
+      <button class="network" onclick="selectNetwork('MashUp')"><span class="network-logo">✓</span><strong>MashUp</strong></button>
+    </div>
+  </section>
+
+  <section class="card stats">
+    <div><div class="stat-icon">▱</div><div class="stat-label">Wallet Balance</div><div class="stat-value">GH₵ 0.00</div><button class="small-deposit" onclick="openModal('deposit')">Deposit</button></div>
+    <div><div class="stat-icon">◇</div><div class="stat-label">Orders Today</div><div class="stat-value">0</div></div>
+    <div><div class="stat-icon">▤</div><div class="stat-label">GB Sold Today</div><div class="stat-value">0.0 GB</div></div>
+    <div><div class="stat-icon">＄</div><div class="stat-label">Revenue Today</div><div class="stat-value">GH₵ 0.00</div></div>
+  </section>
+
+  <section class="card orders" id="recent-orders">
+    <div class="orders-title"><h2 style="margin:0">Recent Orders</h2><span class="count">0</span></div>
+    <div class="order-row"><div class="order-left"><span class="order-logo">RD</span><div><strong>No orders yet</strong><div class="muted">Your orders will appear here after you place one.</div></div></div><span class="status">Ready</span></div>
+    <button class="action-btn" style="margin-top:13px" onclick="scrollToId('place-order')">＋ Place your first order</button>
+  </section>
+
+  <section class="card section quick" id="quick-actions">
+    <h2>Quick Actions</h2>
+    <div class="quick-grid">
+      <button class="quick-tile" onclick="scrollToId('place-order')"><span class="tile-icon">◇</span>Order</button>
+      <button class="quick-tile" onclick="toast('Reports will show your order and spending history once connected.')"><span class="tile-icon">↗</span>Reports</button>
+      <button class="quick-tile" onclick="scrollToId('place-order')"><span class="tile-icon">▤</span>Data</button>
+      <button class="quick-tile" onclick="openModal('deposit')"><span class="tile-icon">▱</span>Deposit</button>
+      <button class="quick-tile spin" onclick="toast('Spin Win is a placeholder feature and does not award real prizes.')"><span class="tile-icon">ϟ</span>Spin Win</button>
+      <button class="quick-tile" onclick="toast('Your transactions will show here when the backend is connected.')"><span class="tile-icon">▤</span>Trans</button>
+      <button class="quick-tile" onclick="toast('Report an issue: customer support integration is not connected yet.')"><span class="tile-icon">⚠</span>Report</button>
+      <button class="quick-tile" onclick="toast('Store feature coming soon.')"><span class="tile-icon">♙</span>Store</button>
+      <button class="quick-tile" onclick="toast('Bulk order feature coming soon.')"><span class="tile-icon">▱</span>Bulk</button>
+      <button class="quick-tile" onclick="toast('Security settings will be connected to your account system.')"><span class="tile-icon">♢</span>Security</button>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="footer-inner">
+    <div class="brand footer-brand"><div class="brandmark">R</div><span>ROYAL<span>DATA</span> <small style="font-size:12px;color:#6e7785">🇬🇭</small></span></div>
+    <p class="footer-desc">Your trusted source for affordable data bundles in Ghana. Fast, reliable, and secure.</p>
+    <a class="channel" href="#" onclick="event.preventDefault();toast('Add your official ROYALDATA WhatsApp Channel link here.');"><span style="font-size:28px">☏</span><span><strong>Join the ROYALDATA community</strong><br><span style="color:#64746b">on our WhatsApp Channel</span></span></a>
+    <div class="footer-columns">
+      <section><h3>QUICK LINKS</h3><a href="#" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">Home</a><a href="#recent-orders">Orders</a><a href="#" onclick="event.preventDefault();toast('Transaction history will be available after backend integration.')">Transactions</a><a href="#" onclick="event.preventDefault();toast('Referral rewards are not enabled yet.')">Refer &amp; Earn</a><a href="#" onclick="event.preventDefault();toast('Profile page coming soon.')">Profile</a><a href="#" onclick="event.preventDefault();toast('News and updates coming soon.')">Blog</a></section>
+      <section><h3>DATA BUNDLES</h3><a href="#place-order" onclick="selectNetwork('MTN')">MTN Bundles</a><a href="#place-order" onclick="selectNetwork('AirtelTigo')">AirtelTigo Bundles</a><a href="#place-order" onclick="selectNetwork('Telecel')">Telecel Bundles <span style="background:#ffc900;color:#172b45;padding:3px 7px;border-radius:99px;font-size:11px">NEW</span></a><a href="#place-order" onclick="selectNetwork('MashUp')">MashUp</a></section>
+      <section><h3>CONTACT US</h3><div class="contactline">✉<br><span style="color:#9aa1ac">Email</span><br>Set your support email</div><div class="contactline">⌖<br><span style="color:#9aa1ac">Location</span><br>Ghana</div><div class="contactline">◷<br><span style="color:#9aa1ac">Support hours</span><br>Update with your real hours</div></section>
+    </div>
+    <div class="copyright"><span>© 2026 ROYALDATA Ghana. All rights reserved.</span><span><a href="#" onclick="event.preventDefault();toast('Add your terms of service before launch.')">Terms</a> &nbsp; <a href="#" onclick="event.preventDefault();toast('Add your privacy policy before launch.')">Privacy</a></span></div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+<div class="modal-backdrop" id="modal-backdrop" onclick="if(event.target===this)closeModal()">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-head"><h2 id="modal-title">Deposit to Wallet</h2><button class="close" onclick="closeModal()" aria-label="Close">×</button></div>
+    <div id="deposit-fields">
+      <p style="color:#697386;line-height:1.5">Demo only. This form does not collect payment or contact a Mobile Money provider yet.</p>
+      <label for="deposit-amount">Amount (GH₵)</label><input id="deposit-amount" type="number" min="1" placeholder="e.g. 20">
+      <label for="deposit-method">Payment method</label><select id="deposit-method"><option>MTN Mobile Money</option><option>Telecel Cash</option><option>AirtelTigo Money</option></select>
+      <label for="deposit-phone">Mobile Money number</label><input id="deposit-phone" type="tel" placeholder="0XX XXX XXXX">
+      <button class="action-btn" onclick="submitDeposit()">Continue (demo)</button>
+      <p class="note">For live payments, connect a legitimate payment gateway on your secure backend. Never put API secret keys in this page.</p>
+    </div>
+  </div>
+</div>
+<script>
+let toastTimer;
+function toast(message){const el=document.getElementById('toast');el.textContent=message;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),3200)}
+function scrollToId(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+function selectNetwork(name){toast(name+' selected. The live bundle list will load after the Datamart API is verified and connected.');}
+function openModal(type){document.getElementById('modal-title').textContent=type==='deposit'?'Deposit to Wallet':'Account';document.getElementById('modal-backdrop').classList.add('open');}
+function closeModal(){document.getElementById('modal-backdrop').classList.remove('open')}
+function submitDeposit(){const amount=Number(document.getElementById('deposit-amount').value);const phone=document.getElementById('deposit-phone').value.trim();if(!amount||amount<1){toast('Enter a valid amount of at least GH₵1.');return}if(!phone){toast('Enter the Mobile Money number for the demo.');return}closeModal();toast('Demo request prepared for GH₵'+amount.toFixed(2)+'. No payment has been taken.')}
+function toggleMenu(){const section=document.getElementById('quick-actions');section.scrollIntoView({behavior:'smooth',block:'center'});toast('Quick Actions opened.')}
+function toggleTheme(){document.body.classList.toggle('night');if(document.body.classList.contains('night')){document.documentElement.style.setProperty('--bg','#17202d');document.documentElement.style.setProperty('--paper','#202d3d');document.documentElement.style.setProperty('--ink','#f3f5f7');document.documentElement.style.setProperty('--line','#394657');toast('Dark appearance enabled for this preview.')}else{document.documentElement.style.setProperty('--bg','#f2f4f7');document.documentElement.style.setProperty('--paper','#fff');document.documentElement.style.setProperty('--ink','#182334');document.documentElement.style.setProperty('--line','#e8ebef');toast('Light appearance enabled.')}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
